@@ -10,17 +10,6 @@ services:
       - POSTGRES_DB=linkwarden
       - POSTGRES_USER=linkwarden
       - 'POSTGRES_PASSWORD=${POSTGRES_PASSWORD}'
-    labels:
-      - coolify.managed=true
-      - coolify.applicationId=linkwarden-postgres
-      - coolify.type=application
-    healthcheck:
-      test:
-        - CMD-SHELL
-        - 'pg_isready -U linkwarden'
-      interval: 10s
-      timeout: 5s
-      retries: 5
   linkwarden:
     build: .
     #image: 'ghcr.io/linkwarden/linkwarden:latest'
@@ -39,10 +28,6 @@ services:
     depends_on:
       - postgres
     labels:
-      - coolify.managed=true
-      - coolify.applicationId=linkwarden
-      - coolify.type=application
       - traefik.enable=true
-      - 'traefik.http.routers.linkwarden.rule=Host(`${SERVICE_FQDN_LINKWARDEN}`) && PathPrefix(`/`)'
-      - traefik.http.routers.linkwarden.entryPoints=https
-      - traefik.http.routers.linkwarden.tls=true
+      - 'traefik.http.routers.linkwarden-custom.rule=Host(`${SERVICE_FQDN_LINKWARDEN}`) && PathPrefix(`/`)'
+      - traefik.http.routers.linkwarden-custom.entryPoints=http
