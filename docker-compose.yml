@@ -43,6 +43,6 @@ services:
       - coolify.applicationId=linkwarden
       - coolify.type=application
       - traefik.enable=true
-      - 'traefik.http.routers.linkwarden.rule=Host(`{SERVICE_FQDN_LINKWARDEN}`) && PathPrefix(`/`)'
+      - 'traefik.http.routers.linkwarden.rule=Host(`${SERVICE_FQDN_LINKWARDEN}`) && PathPrefix(`/`)'
       - traefik.http.routers.linkwarden.entryPoints=https
       - traefik.http.routers.linkwarden.tls=true
