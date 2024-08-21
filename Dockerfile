@@ -36,5 +36,6 @@ COPY . .
 
 RUN yarn prisma generate && \
     yarn build
-    
-CMD yarn prisma migrate deploy && yarn start
+
+CMD ["/bin/sh", "-c", "yarn prisma migrate deploy && yarn start"]
+#CMD yarn prisma migrate deploy && yarn start
